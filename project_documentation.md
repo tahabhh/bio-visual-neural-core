@@ -1,32 +1,13 @@
-# Bio-Visual Neural Core: Comprehensive Project Documentation
+# Bio-Visual Neural Core: Comprehensive Technical & Clinical Safety Report
 
-## Inspiration
-Total blindness affects millions globally, isolating individuals from visual environments and color perception. Our inspiration stemmed from a desire to bypass damaged ocular pathways using non-invasive neurostimulation, translating digital camera frames directly into bio-compatible electrical frequency signatures that the brain can interpret safely.
+## 1. Problem Statement & Target Users
+Over 43 million individuals live with total blindness globally. Invasive cortical implants require high-risk neurosurgery, whereas cloud-dependent smart glasses suffer from network latency and severe privacy exposure. **Bio-Visual Neural Core (BVNC)** provides a 100% offline, wearable Edge-AI alternative that translates real-time optical streams into safe, non-invasive micro-current frequency signatures over the **mastoid process**.
 
-## What it does
-The Bio-Visual Neural Core is a wearable edge-AI assistive system that captures real-time optical streams via a compact camera. It executes local image processing and color breakdown (RGB values) using TensorFlow Lite, converting pixel matrices into precise, deterministic micro-current electrical frequencies (PWM signals). These signals are delivered safely via non-invasive cranial electrodes positioned over the mastoid process behind the ears to restore spatial and color perception.
+## 2. OpenCV 5 & TinyML Edge Architecture
+- **Foveal-Weighted Chromatic Encoding (`src/color_encoder.py`):** Prioritizes the central 32x32 foveal region (70% weight) alongside peripheral context (30% weight), computing ITU-R BT.709 luminance and red-green / blue-yellow opponent contrast.
+- **INT8 Edge Salience & Hazard Detection (`src/tflite_edge_inference.py`):** Computes spatial gradient energy and bilateral hemisphere asymmetry locally on the edge device without internet connectivity.
+- **Agentic Vision Orchestrator (`src/agentic_vision_controller.py`):** Dynamically transitions between four neuro-stimulation regimes (`IDLE_SAFE`, `CHROMATIC_EXPLORATION`, `SPATIAL_CONTOUR_LOCK`, and `PROXIMITY_HAZARD_ALERT`) based on real-time visual scene risk.
 
-## How we built it
-- **Computer Vision:** Python and OpenCV for real-time video capture, spatial pixel parsing, and color extraction.
-- **Edge Intelligence:** TensorFlow Lite (TinyML) running locally on device for efficient neural decoding without cloud latency.
-- **Firmware & Control:** C++ (Arduino IDE) running on an ATmega328P microcontroller (Arduino Nano) with rigorous packet boundary verification and voltage/current regulation circuits.
-- **Safety Architecture:** Integrated hardware boundaries ensuring micro-ampere safety limits and isolated power rails.
-
-## Challenges we ran into
-- Maintaining real-time frame processing speeds while running local neural inference on resource-constrained hardware.
-- Guaranteeing absolute electrical safety and stability for non-invasive stimulation over the mastoid process.
-- Developing a deterministic mapping algorithm to reliably translate complex RGB color gradients into distinct bio-compatible frequency telemetry blocks.
-
-## Accomplishments that we're proud of
-- Successfully engineering a complete, end-to-end local Edge AI pipeline that operates entirely offline with complete user privacy.
-- Implementing a robust safety-first electrical regulation framework for non-invasive neural stimulation.
-- Creating a cost-effective, highly accessible hardware prototype built on an ultra-low-cost single-MCU architecture.
-
-## What we learned
-- The immense potential of combining TinyML with non-invasive bio-electric interfaces to solve critical accessibility challenges.
-- The importance of strict local data processing to safeguard user privacy in medical and assistive technologies.
-
-## What's next for Bio-Visual Neural Core
-- Optimizing neural mapping algorithms for enhanced color resolution and depth perception.
-- Conducting rigorous algorithmic validation and expanding clinical collaboration frameworks.
-- Scaling the hardware architecture into a comfortable, low-profile wearable form factor for everyday independent use.
+## 3. Dual-Layer Electrical Safety & Fault Tolerance
+- **Software Guard (`src/safety_monitor.py`):** Clamps frequency (`40–1200 Hz`) and PWM duty (`0–220`), ensuring instantaneous current never exceeds `448.5 µA` (`< 450 µA` ceiling).
+- **Firmware 16-Bit Timer1 & Watchdog (`firmware/nano_neural_firmware/`):** Verifies every 6-byte UART frame via `CRC-8` (`0x07` polynomial) and immediately zeroes output on Pin D9 if serial heartbeats lapse for `> 500 ms`.

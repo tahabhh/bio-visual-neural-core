@@ -1,0 +1,20 @@
+{
+  "benchmark_version": "3.0.0",
+  "frames_evaluated": 200,
+  "latency_metrics_ms": {
+    "mean_ms": 1.842,
+    "p95_ms": 2.415,
+    "p99_ms": 3.112,
+    "effective_fps": 542.9
+  },
+  "safety_verification": {
+    "max_observed_current_microamps": 417.92,
+    "regulatory_ceiling_microamps": 450.0,
+    "zero_overcurrent_violations": true,
+    "crc8_packet_integrity_rate": 100.0
+  },
+  "agentic_mode_distribution": {
+    "PROXIMITY_HAZARD_ALERT": 142,
+    "SPATIAL_CONTOUR_LOCK": 58
+  }
+}

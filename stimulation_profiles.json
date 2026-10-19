@@ -1,0 +1,28 @@
+{
+  "profiles": {
+    "IDLE_SAFE": {
+      "mode_id": 0,
+      "description": "Zero-energy standby when optical feed is occluded or dark",
+      "freq_multiplier": 1.0,
+      "pwm_ceiling": 40
+    },
+    "CHROMATIC_EXPLORATION": {
+      "mode_id": 1,
+      "description": "High-resolution CIE-LAB hue/luminance continuous neural encoding",
+      "freq_multiplier": 1.0,
+      "pwm_ceiling": 185
+    },
+    "SPATIAL_CONTOUR_LOCK": {
+      "mode_id": 2,
+      "description": "Edge-salience modulated carrier for doorway and path navigation",
+      "freq_multiplier": 1.15,
+      "pwm_ceiling": 205
+    },
+    "PROXIMITY_HAZARD_ALERT": {
+      "mode_id": 3,
+      "description": "High-priority rhythmic burst alerting user to immediate central obstacle",
+      "freq_multiplier": 1.35,
+      "pwm_ceiling": 220
+    }
+  }
+}
